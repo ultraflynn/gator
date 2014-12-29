@@ -1,0 +1,235 @@
+<project name="gator" default="jar">
+  <target name="dirs">
+    <mkdir dir="build"/>
+    <mkdir dir="build/classes"/>
+    <mkdir dir="build/classes/main"/>
+    <mkdir dir="build/classes/test"/>
+    <mkdir dir="build/classes/int-test"/>
+    <mkdir dir="build/jars"/>
+    <mkdir dir="build/logs"/>
+    <mkdir dir="build/reports"/>
+    <mkdir dir="build/reports/jasper"/>
+    <mkdir dir="build/tmp"/>
+    <mkdir dir="build/docs/api"/>
+  </target>
+
+
+  <target name="copy">
+    <copy toDir="build/classes/main">
+      <fileset dir="src/classes/main">
+        <include name="**/*.xml"/>
+        <include name="**/*.properties"/>
+      </fileset>
+    </copy>
+    <copy toDir="build/classes/test">
+      <fileset dir="src/classes/test">
+        <include name="**/*.xml"/>
+        <include name="**/*.properties"/>
+      </fileset>
+    </copy>
+    <copy toDir="build/classes/int-test">
+      <fileset dir="src/classes/int-test">
+        <include name="**/*.xml"/>
+        <include name="**/*.properties"/>
+      </fileset>
+    </copy>
+  </target>
+
+
+  <target name="init" depends="dirs,copy">
+    <taskdef name="checkstyle" classname="com.puppycrawl.tools.checkstyle.CheckStyleTask">
+      <classpath location="lib/checkstyle-all-3.0.jar"/>
+    </taskdef>
+
+    <taskdef name="jrc" classname="dori.jasper.ant.JRAntCompileTask"> 
+      <classpath>
+        <pathelement location="lib/jasperreports.jar"/>
+        <pathelement location="lib/commons-digester.jar"/>
+        <pathelement location="lib/commons-collections.jar"/>
+        <pathelement location="lib/commons-logging.jar"/>
+        <pathelement location="lib/commons-beanutils.jar"/>
+      </classpath>
+    </taskdef>
+  </target>
+
+
+  <target name="style" depends="init">
+    <checkstyle config="checkstyle.xml">
+      <fileset dir="src/classes/main" includes="**/*.java" excludes="**/CVS/**"/>
+    </checkstyle>
+  </target>
+
+
+  <target name="compile" depends="style,compile-reports">
+    <javac srcdir="src/classes/main" destdir="build/classes/main" excludes="**/CVS/**" debug="true">
+      <classpath>
+        <pathelement location="lib/commons-digester.jar"/>
+        <pathelement location="lib/dom4j.jar"/>
+        <pathelement location="lib/jakarta-regexp-1.2.jar"/>
+        <pathelement location="lib/jasperreports.jar"/>
+        <pathelement location="lib/commons-logging.jar"/>
+      </classpath>
+    </javac>
+  </target>
+
+
+  <target name="jar" depends="compile">
+    <jar jarfile="build/jars/gator.jar" compress="false">
+        <fileset dir="build/classes/main">
+            <include name="**/*"/>
+        </fileset>
+        <fileset dir="build/reports">
+            <include name="**/*"/>
+        </fileset>
+    </jar>
+  </target>
+
+
+  <target name="style-test" depends="init">
+    <checkstyle config="checkstyle.xml">
+      <fileset dir="src/classes/test" includes="**/*.java" excludes="**/CVS/**"/>
+    </checkstyle>
+  </target>
+
+
+  <target name="compile-test" depends="style-test,compile-test-reports,jar">
+    <javac srcdir="src/classes/test" destdir="build/classes/test" excludes="**/CVS/**" debug="true">
+      <classpath>
+        <pathelement location="build/classes/main"/>
+        <pathelement location="lib/easymock.jar"/>
+        <pathelement location="lib/dom4j.jar"/>
+        <pathelement location="lib/junit.jar"/>
+      </classpath>
+    </javac>
+  </target>
+
+
+  <target name="test" depends="compile-test">
+    <junit printsummary="yes" haltonfailure="no" fork="yes">
+      <formatter type="plain"/>
+
+      <classpath>
+        <pathelement location="build/classes/main"/>
+        <pathelement location="build/classes/test"/>
+        <pathelement location="build/reports"/>
+        <pathelement location="lib/dom4j.jar"/>
+        <pathelement location="lib/easymock.jar"/>
+        <pathelement location="lib/jakarta-regexp-1.2.jar"/>
+        <pathelement location="lib/commons-digester.jar"/>
+        <pathelement location="lib/commons-collections.jar"/>
+        <pathelement location="lib/commons-logging.jar"/>
+        <pathelement location="lib/commons-beanutils.jar"/>
+        <pathelement location="lib/jasperreports.jar"/>
+        <pathelement location="lib/iText.jar"/>
+        <pathelement location="lib/jakarta-poi-1.5.1-final-20020615.jar"/>
+      </classpath>
+
+      <batchtest todir="build/logs" fork="yes">
+        <fileset dir="src/classes/test">
+          <include name="**/*Test*.java"/>
+          <exclude name="**/CVS/**"/>
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+
+
+  <target name="style-int-test" depends="init">
+    <checkstyle config="checkstyle.xml">
+      <fileset dir="src/classes/int-test" includes="**/*.java" excludes="**/CVS/**"/>
+    </checkstyle>
+  </target>
+
+
+  <target name="compile-int-test" depends="style-int-test,compile-int-test-reports,jar">
+    <javac srcdir="src/classes/int-test" destdir="build/classes/int-test" excludes="**/CVS/**" debug="true">
+      <classpath>
+        <pathelement location="build/classes/main"/>
+        <pathelement location="lib/easymock.jar"/>
+        <pathelement location="lib/dom4j.jar"/>
+        <pathelement location="lib/junit.jar"/>
+      </classpath>
+    </javac>
+  </target>
+
+
+  <target name="int-test" depends="compile-int-test">
+    <junit printsummary="yes" haltonfailure="no" fork="yes">
+      <formatter type="plain"/>
+
+      <classpath>
+        <pathelement location="build/classes/main"/>
+        <pathelement location="build/classes/int-test"/>
+        <pathelement location="build/reports"/>
+        <pathelement location="lib/dom4j.jar"/>
+        <pathelement location="lib/easymock.jar"/>
+        <pathelement location="lib/jakarta-regexp-1.2.jar"/>
+        <pathelement location="lib/commons-digester.jar"/>
+        <pathelement location="lib/commons-collections.jar"/>
+        <pathelement location="lib/commons-logging.jar"/>
+        <pathelement location="lib/commons-beanutils.jar"/>
+        <pathelement location="lib/jasperreports.jar"/>
+        <pathelement location="lib/iText.jar"/>
+        <pathelement location="lib/jakarta-poi-1.5.1-final-20020615.jar"/>
+      </classpath>
+
+      <batchtest todir="build/logs" fork="yes">
+        <fileset dir="src/classes/int-test">
+          <include name="**/*Test*.java"/>
+          <exclude name="**/CVS/**"/>
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+
+
+  <target name="test-all" depends="test,int-test">
+  </target>
+
+
+  <target name="javadoc" depends="jar">
+    <javadoc destdir="build/docs/api" author="true" version="true" use="true" windowtitle="Gator Estimation">
+      <fileset dir="src/classes/main" defaultexcludes="yes">
+        <include name="net/sourceforge/gator/**"/>
+        <exclude name="**/*.xml"/>
+      </fileset>
+      <classpath>
+        <pathelement location="lib/commons-digester.jar"/>
+        <pathelement location="lib/dom4j.jar"/>
+        <pathelement location="lib/jakarta-regexp-1.2.jar"/>
+      </classpath>
+    </javadoc>
+  </target>
+
+
+  <target name="compile-reports" depends="init">
+    <jrc srcdir="src/reports/main" destdir="build/reports/jasper" tempdir="build/tmp" keepjava="true" xmlvalidation="true">
+      <classpath>
+        <pathelement location="lib/jasperreports.jar"/>
+      </classpath>
+    </jrc>
+  </target>
+
+
+  <target name="compile-test-reports" depends="init">
+    <jrc srcdir="src/reports/test" destdir="build/reports/jasper" tempdir="build/tmp" keepjava="true" xmlvalidation="true">
+      <classpath>
+        <pathelement location="lib/jasperreports.jar"/>
+      </classpath>
+    </jrc>
+  </target>
+
+
+  <target name="compile-int-test-reports" depends="init">
+    <jrc srcdir="src/reports/int-test" destdir="build/reports/jasper" tempdir="build/tmp" keepjava="true" xmlvalidation="true">
+      <classpath>
+        <pathelement location="lib/jasperreports.jar"/>
+      </classpath>
+    </jrc>
+  </target>
+
+
+  <target name="clean">
+    <delete dir="build"/>
+  </target>
+</project>

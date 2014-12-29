@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<civilEngineeringConfiguration estimateDirectory=".\build\classes\int-test\net\sourceforge\gator" estimatePrefix="" estimateSuffix=".xml" referenceLength="8">
+  <outputs directory="Output Directory">
+    <jasperOutput name="jasper report name" description="Jasper Report Name">
+      <xls/>
+    </jasperOutput>
+  </outputs>
+
+  <helpers>
+    <helper name="helper" description="dummy helper" uiClassName="net.sourceforge.gator.helpers.DummyHelperUI" calculationClassName="net.sourceforge.gator.calculation.DummyCalculation"/>
+  </helpers>
+  <fields>
+    <field name="field" description="dummy field" uiClassName="net.sourceforge.gator.fields.DummyFieldUI"/>
+  </fields>
+  <categories>
+    <category name="category1" description="Category 1">
+      <category name="category2" description="Category 2">
+        <item>item</item>
+      </category>
+    </category>
+  </categories>
+  <chargeableItems>
+    <item name="item" description="dummy item">
+      <helpers>
+        <helper/>
+      </helpers>
+      <field>field</field>
+      <cost>42.42</cost>
+    </item>
+  </chargeableItems>
+</civilEngineeringConfiguration>

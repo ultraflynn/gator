@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<civilEngineeringEstimate reference="REFERENCE" internalReference="INTERNAL REFERENCE" date="DATE">
+    <customer>
+        <customerDetails>
+            <customerName>CUSTOMER NAME</customerName>
+            <contact>CONTACT NAME</contact>
+            <address>
+Address Line 1
+Address Line 2
+Address Line 3
+            </address>
+            <homePhone>HOME PHONE</homePhone>
+            <fax>FAX</fax>
+            <workPhone>³</workPhone>
+            <mobile>MOBILE</mobile>
+            <notes>NOTES</notes>
+        </customerDetails>
+        <jobDetails>
+            <customerName>½</customerName>
+            <jobPhone>JOB DETAILS JOB PHONE</jobPhone>
+            <address>
+Job Details Address Line 1
+Job Details Address Line 2
+Job Details Address Line 3
+            </address>
+            <siteContact>JOB DETAILS SITE CONTACT</siteContact>
+        </jobDetails>
+    </customer>
+    <jobSummary>
+        <worksRequired>WORKS REQUIRED</worksRequired>
+        <jobNotes>JOB NOTES</jobNotes>
+        <furtherInstructions>FURTHER INSTRUCTIONS</furtherInstructions>
+    </jobSummary>
+    <estimateBreakdown>
+        <job>
+            <description>
+                JOB DESCRIPTION
+            </description>
+            <quantity prefix="QUANTITY PREFIX" unit="QUANTITY UNIT">12.23</quantity>
+            <task prefix="PREFIX" id="ID" profitMarginPercentage="10.24">
+                <summary>
+                    <jobDescription>
+                        JOB DESCRIPTION
+                    </jobDescription>
+                    <quantity unit="SUMMARY QUANTITY UNIT">45.56</quantity>
+                </summary>
+                <subTasks>
+                    <subTask type="SUBTASK TYPE" description="SUBTASK DESCRIPTION" code="SUBTASK CODE">
+                        <quantity unit="SUBTASK QUANTITY UNIT">56.67</quantity>
+                        <unitCost>78.89</unitCost>
+                    </subTask>
+                </subTasks>
+            </task>
+        </job>
+    </estimateBreakdown>
+</civilEngineeringEstimate>

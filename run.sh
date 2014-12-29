@@ -1,0 +1,1 @@
+java -Xmx256M -classpath "lib\\dom4j.jar;lib\\easymock.jar;lib\\jakarta-regexp-1.2.jar;lib\\commons-digester.jar;lib\\commons-collections.jar;lib\\commons-logging.jar;lib\\commons-beanutils.jar;lib\\jasperreports.jar;lib\\iText.jar;lib\\jakarta-poi-1.5.1-final-20020615.jar;build\\jars\\gator.jar" net.sourceforge.gator.ui.MainUI

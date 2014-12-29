@@ -1,0 +1,76 @@
+<digester-rules>
+    <pattern value="civilEngineeringConfiguration">
+        <object-create-rule classname="net.sourceforge.gator.civil.ConfigurationImpl"/>
+        <set-properties-rule/>
+
+        <pattern value="outputs">
+            <call-method-rule methodname="setOutputDirectory" paramcount="1" paramtypes="java.lang.String"/>
+            <call-param-rule attrname="directory" paramnumber="0"/>
+
+            <pattern value="jasperOutput">
+                <object-create-rule classname="net.sourceforge.gator.JasperOutput"/>
+                <set-properties-rule/>
+                <set-next-rule methodname="addOutput"/>
+
+                <pattern value="xls">
+                    <object-create-rule classname="net.sourceforge.gator.XlsJasperDestination"/>
+                    <set-properties-rule/>
+                    <set-next-rule methodname="addDestination"/>
+                </pattern>
+
+                <pattern value="printed">
+                    <object-create-rule classname="net.sourceforge.gator.XlsJasperDestination"/>
+                    <set-properties-rule/>
+                    <set-next-rule methodname="addDestination"/>
+                </pattern>
+            </pattern>
+        </pattern>
+
+        <pattern value="helpers/helper">
+            <object-create-rule classname="net.sourceforge.gator.civil.HelperImpl"/>
+            <set-properties-rule/>
+            <set-next-rule methodname="addHelper"/>
+        </pattern>
+
+        <pattern value="fields/field">
+            <object-create-rule classname="net.sourceforge.gator.civil.FieldImpl"/>
+            <set-properties-rule/>
+            <set-next-rule methodname="addField"/>
+        </pattern>
+
+        <pattern value="chargeableItems/item">
+            <object-create-rule classname="net.sourceforge.gator.civil.ItemImpl"/>
+            <set-properties-rule/>
+
+            <pattern value="helpers/helper">
+                <call-method-rule methodname="addHelperRef" paramcount="0"/>
+            </pattern>
+
+            <pattern value="field">
+                <call-method-rule methodname="setFieldRef" paramcount="0"/>
+            </pattern>
+
+            <pattern value="cost">
+                <call-method-rule methodname="setCost" paramcount="0"/>
+            </pattern>
+
+            <set-next-rule methodname="addItem"/>
+        </pattern>
+
+        <pattern value="categories">
+            <call-method-rule methodname="setRootCategoryName" paramcount="1" paramtypes="java.lang.String"/>
+            <call-param-rule attrname="rootCategoryName" paramnumber="0"/>
+        </pattern>
+    </pattern>
+
+    <pattern value="!*/category">
+        <object-create-rule classname="net.sourceforge.gator.civil.CategoryImpl"/>
+        <set-properties-rule/>
+
+        <pattern value="item">
+            <call-method-rule methodname="addItemRef" paramcount="0"/>
+        </pattern>
+
+        <set-next-rule methodname="addCategory"/>
+    </pattern>
+</digester-rules>

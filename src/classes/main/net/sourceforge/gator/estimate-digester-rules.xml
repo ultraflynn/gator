@@ -1,0 +1,120 @@
+<digester-rules>
+    <pattern value="civilEngineeringEstimate">
+        <object-create-rule classname="net.sourceforge.gator.civil.EstimateImpl"/>
+        <set-properties-rule/>
+
+        <pattern value="customer">
+            <pattern value="customerDetails">
+                <pattern value="customerName">
+                    <call-method-rule methodname="setCustomerName" paramcount="0"/>
+                </pattern>
+                <pattern value="contact">
+                    <call-method-rule methodname="setContactName" paramcount="0"/>
+                </pattern>
+                <pattern value="address">
+                    <call-method-rule methodname="setCustomerAddress" paramcount="0"/>
+                </pattern>
+                <pattern value="homePhone">
+                    <call-method-rule methodname="setHomePhone" paramcount="0"/>
+                </pattern>
+                <pattern value="fax">
+                    <call-method-rule methodname="setFax" paramcount="0"/>
+                </pattern>
+                <pattern value="workPhone">
+                    <call-method-rule methodname="setWorkPhone" paramcount="0"/>
+                </pattern>
+                <pattern value="mobile">
+                    <call-method-rule methodname="setMobile" paramcount="0"/>
+                </pattern>
+                <pattern value="notes">
+                    <call-method-rule methodname="setNotes" paramcount="0"/>
+                </pattern>
+            </pattern>
+            <pattern value="jobDetails">
+                <pattern value="customerName">
+                    <call-method-rule methodname="setJobCustomerName" paramcount="0"/>
+                </pattern>
+                <pattern value="jobPhone">
+                    <call-method-rule methodname="setJobPhone" paramcount="0"/>
+                </pattern>
+                <pattern value="address">
+                    <call-method-rule methodname="setJobAddress" paramcount="0"/>
+                </pattern>
+                <pattern value="siteContact">
+                    <call-method-rule methodname="setSiteContact" paramcount="0"/>
+                </pattern>
+            </pattern>
+        </pattern>
+
+        <pattern value="jobSummary">
+            <pattern value="worksRequired">
+                <call-method-rule methodname="setWorksRequired" paramcount="0"/>
+            </pattern>
+            <pattern value="jobNotes">
+                <call-method-rule methodname="setJobNotes" paramcount="0"/>
+            </pattern>
+            <pattern value="furtherInstructions">
+                <call-method-rule methodname="setFurtherInstructions" paramcount="0"/>
+            </pattern>
+        </pattern>
+
+        <pattern value="estimateBreakdown">
+            <pattern value="job">
+                <object-create-rule classname="net.sourceforge.gator.civil.JobImpl"/>
+                <set-properties-rule/>
+
+                <pattern value="description">
+                    <call-method-rule methodname="setDescription" paramcount="0"/>
+                </pattern>
+                <pattern value="quantity">
+                    <call-method-rule methodname="setQuantity" paramcount="0"/>
+                    <call-method-rule methodname="setQuantityUnit" paramcount="1" paramtypes="java.lang.String"/>
+                    <call-param-rule attrname="unit" paramnumber="0"/>
+                    <call-method-rule methodname="setQuantityPrefix" paramcount="1" paramtypes="java.lang.String"/>
+                    <call-param-rule attrname="prefix" paramnumber="0"/>
+                </pattern>
+                <pattern value="task">
+                    <object-create-rule classname="net.sourceforge.gator.civil.TaskImpl"/>
+                    <set-properties-rule/>
+
+                    <pattern value="profitMarginPercentage">
+                        <call-method-rule methodname="setProfitMarginPercentage" paramcount="0"/>
+                    </pattern>
+
+                    <pattern value="summary">
+                        <pattern value="jobDescription">
+                            <call-method-rule methodname="setJobDescription" paramcount="0"/>
+                        </pattern>
+                        <pattern value="quantity">
+                            <call-method-rule methodname="setQuantity" paramcount="0"/>
+                            <call-method-rule methodname="setQuantityUnit" paramcount="1" paramtypes="java.lang.String"/>
+                            <call-param-rule attrname="unit" paramnumber="0"/>
+                        </pattern>
+                    </pattern>
+
+                    <pattern value="subTasks">
+                        <pattern value="subTask">
+                            <object-create-rule classname="net.sourceforge.gator.civil.SubTaskImpl"/>
+                            <set-properties-rule/>
+
+                            <pattern value="quantity">
+                                <call-method-rule methodname="setQuantity" paramcount="0"/>
+                                <call-method-rule methodname="setQuantityUnit" paramcount="1" paramtypes="java.lang.String"/>
+                                <call-param-rule attrname="unit" paramnumber="0"/>
+                            </pattern>
+                            <pattern value="unitCost">
+                                <call-method-rule methodname="setUnitCost" paramcount="0"/>
+                            </pattern>
+
+                            <set-next-rule methodname="addSubTask"/>
+                        </pattern>
+                    </pattern>
+
+                    <set-next-rule methodname="addTask"/>
+                </pattern>
+
+                <set-next-rule methodname="addJob"/>
+            </pattern>
+        </pattern>
+    </pattern>
+</digester-rules>

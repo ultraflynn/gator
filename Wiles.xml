@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<civilEngineeringConfiguration estimateDirectory="./build/tmp" estimatePrefix="E" estimateSuffix=".xml" referenceLength="8">
+  <outputs directory="./build/tmp">
+    <jasperOutput name="EstimateBreakdown" description="Estimate Breakdown"/>
+  </outputs>
+  <helpers>
+    <helper name="cubic-area-dimensions" description="Cubic Area Dimensions" uiClassName="net.sourceforge.gator.helpers.CubicDimensionsHelperUI"/>
+    <helper name="tonnage" description="Tonnage" uiClassName="net.sourceforge.gator.helpers.TonnageHelperUI"/>
+    <helper name="area" description="Area" uiClassName="net.sourceforge.gator.helpers.AreaHelperUI"/>
+  </helpers>
+  <fields>
+    <field name="tonne" description="Tonne" uiClassName="net.sourceforge.gator.fields.TonneFieldUI"/>
+    <field name="hour" description="Hour" uiClassName="net.sourceforge.gator.fields.HourFieldUI"/>
+    <field name="cubicmetres" description="m³" uiClassName="net.sourceforge.gator.fields.CubicMetreFieldUI"/>
+    <field name="litre" description="Litre" uiClassName="net.sourceforge.gator.fields.LitreFieldUI"/>
+  </fields>
+  <categories rootCategoryName="Library">
+    <category name="groundwork" description="Groundwork">
+      <category name="plant" description="Plant">
+        <item>cement-mixer</item>
+      </category>
+      <category name="groundwork-labour" description="Labour">
+        <item>labour</item>
+        <item>excavator1</item>
+      </category>
+      <category name="surfacing" description="Surfacing">
+        <item>weedkiller</item>
+      </category>
+      <category name="building-materials" description="Building Materials">
+        <item>mortar-plasticiser</item>
+        <item>sharp-sand</item>
+        <item>2003569911</item>
+        <item>20035691633</item>
+      </category>
+      <category name="200351272239" description="sdefsdf">
+        <category name="20035127230" description="sdfasdf"/>
+      </category>
+    </category>
+    <category name="brickwork" description="Brickwork"/>
+    <category name="disposal" description="Disposal">
+      <item>landfill-tax</item>
+    </category>
+    <category name="tarmac" description="Tarmac">
+      <category name="tarmac-labour" description="Labour"/>
+    </category>
+  </categories>
+  <chargeableItems>
+    <item name="sharp-sand" description="Sand: Sharp Washed">
+      <helpers>
+        <helper>cubic-area-dimensions</helper>
+        <helper>area</helper>
+        <helper>tonnage</helper>
+      </helpers>
+      <field>cubicmetres</field>
+      <cost>9.5</cost>
+    </item>
+    <item name="labour" description="Labour">
+      <helpers>
+        <helper>area</helper>
+      </helpers>
+      <field>hour</field>
+      <cost>42.42</cost>
+    </item>
+    <item name="mortar-plasticiser" description="Mortar Plasticiser">
+      <helpers>
+        <helper>area</helper>
+      </helpers>
+      <field>litre</field>
+      <cost>0.5</cost>
+    </item>
+    <item name="2003569911" description="Cement: OP">
+      <helpers>
+        <helper>area</helper>
+      </helpers>
+      <field>litre</field>
+      <cost>2.3</cost>
+    </item>
+    <item name="20036271157" description="Stuff">
+      <helpers>
+        <helper>area</helper>
+      </helpers>
+      <field>tonne</field>
+      <cost>20.0</cost>
+    </item>
+    <item name="weedkiller" description="Weedkiller">
+      <helpers>
+        <helper>area</helper>
+      </helpers>
+      <field>litre</field>
+      <cost>0.13</cost>
+    </item>
+    <item name="cement-mixer" description="Cement Mixer">
+      <helpers>
+        <helper>area</helper>
+      </helpers>
+      <field>hour</field>
+      <cost>15.0</cost>
+    </item>
+    <item name="20035691633" description="Bricks: LBC Facing - Heather">
+      <helpers>
+        <helper>area</helper>
+      </helpers>
+      <field>tonne</field>
+      <cost>0.28</cost>
+    </item>
+    <item name="landfill-tax" description="Landfill Tax">
+      <helpers>
+        <helper>cubic-area-dimensions</helper>
+        <helper>area</helper>
+        <helper>tonnage</helper>
+      </helpers>
+      <field>tonne</field>
+      <cost>4.5</cost>
+    </item>
+    <item name="excavator1" description="Excavator &amp; Operator 360° - 3.0-tonne">
+      <helpers>
+        <helper>cubic-area-dimensions</helper>
+        <helper>area</helper>
+        <helper>tonnage</helper>
+      </helpers>
+      <field>hour</field>
+      <cost>42.42</cost>
+    </item>
+  </chargeableItems>
+</civilEngineeringConfiguration>
